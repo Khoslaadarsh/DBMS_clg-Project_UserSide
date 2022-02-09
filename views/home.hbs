@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+    <h3>RailRev</h3>
+    <h2>Welcome {{user.First_name}} {{user.Last_name}}</h2>
+    <hr>
+    <form action="#" method="get">
+        <input type="text" name="train_from" id="" placeholder="From">
+        <input type="text" name="train_to" id="" placeholder="To">
+        <input type="date" name="train_date" id="" placeholder="dd/mm/yyy">
+        <br>
+        <button type="submit">Search</button>
+    </form>
+
+    <a href="/addStations"> ADD NEW STATIONS</a>
+    <br>
+    <hr>
+
+    <button type="submit"><a href="/login">Log In</a></button>
+    <button type="submit"><a href="/register">Sign Up</a></button>
+    <br>
+    <hr>
+
+    <div>
+        <form action="/logout" method="post">
+            <button class="btn btn-primary"> Log out</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

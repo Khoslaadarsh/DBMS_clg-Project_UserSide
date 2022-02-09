@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stations</title>
+</head>
+
+<body>
+    <h3>Add a new Station</h3>
+
+    <form action="/addStations" method="post">
+        {{!-- <input type="number" name="id" id="station_id" placeholder="Station_ID"><br> --}}
+        <input type="text" name="nameofstation" id="nameofstation" placeholder="Station Name"><br>
+        <input type="text" name="city" id="stationCity" placeholder="City/State"><br>
+        <button type="submit">Add Station</button>
+    </form>
+
+    <table border="1" cellspacing="10" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>State/City</th>
+        </tr>
+        {{#each stations as |station|}}
+        <tr>
+            <td>{{station.Station_ID}}</td>
+            <td>{{station.Name}}</td>
+            <td>{{station.City}}</td>
+        </tr>
+        {{/each}}
+    </table>
+
+    <br>
+    <a href="/">Home</a>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+h3{
+    color:cornflowerblue;
+}
+
+.image-left {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJsfKLqD2Xx4snPUhRJAfqBRQUHeyld5K3BQ&usqp=CAU);
+    height: 600px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
+    opacity: 0.6;
+    border-radius: 3px;
+}
+
+.mt-5{
+    margin-top: 10px;
+}
+
+.mt-10{
+    margin-top: 100px;
+}
