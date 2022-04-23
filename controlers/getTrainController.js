@@ -1,13 +1,7 @@
 
 
-const mysql = require('mysql2');
+const connection = require("../database/connection");
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'tempUser',
-    password: 'Khosla@2000',
-    database: 'railrev2'
-})
 
 function GetTrains(req) {
 
