@@ -7,7 +7,7 @@ let getLoginPage = (req, res) => {
 
 let checkLoggedOut = (req, res, next) => {
     if (req.isAuthenticated()) {
-        res.redirect('/');
+        res.redirect('/home');
     }
     else
         next();
@@ -15,9 +15,15 @@ let checkLoggedOut = (req, res, next) => {
 
 let checkLoggedIn = (req, res, next) => {
 
+    if (req.isAuthenticated()) {
+        res.redirect('/home');
+    }
+    else
+        next();
+}
+let checkLoggedInHome = (req, res, next) => {
     if (!req.isAuthenticated()) {
-        // res.send('yes logged in');
-        res.redirect("/login");
+        res.redirect('/');
     }
     else
         next();
@@ -34,6 +40,7 @@ exports = module.exports = {
     getLoginPage,
     checkLoggedIn,
     checkLoggedOut,
-    postLogOut
+    postLogOut,
+    checkLoggedInHome
 }
 

@@ -32,7 +32,7 @@ let comparePasswordUser = (user, password) => {
     return new Promise(async (resolve, reject) => {
         try {
             let isMatch = (password === user.Password);
-            console.log(password, user.Password);
+            // console.log(password, user.Password);
             if (isMatch) resolve(true);
             else resolve("The Password you have entered is incorrect");
         }
@@ -59,7 +59,6 @@ let findUserById = (id) => {
             reject(err);
         }
     })
-
 }
 
 exports = module.exports = {

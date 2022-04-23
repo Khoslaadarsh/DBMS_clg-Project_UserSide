@@ -5,79 +5,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Register </title>
-    <link rel="stylesheet" type="text/css" href="/main.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <link rel='stylesheet' type='text/css' media='screen' href='signup.css'>
+    <title>SignUp</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="container">
-            <div class="row mt-5">
-                <div class="col-sm-7 image-left">
-                </div>
-                <div class="col-sm-5">
-                    {{#if errors}}
-                    {{#each errors as |error|}}
-                    <div class="alert alert-danger">
-                        {{error}}
-                    </div>
-                    {{/each}}
-                    {{/if}}
-
-
-                    <form method="post" action="/register">
-                        <div class="form-group">
-                            <label for="firstname">First name</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname"
-                                placeholder="Enter First Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastname">Last name</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname"
-                                placeholder="Enter Last Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="Address">Address</label>
-                            <input type="text" class="form-control" id="Address" name="Address"
-                                placeholder="Enter Your Address">
-                        </div>
-                        <div class="form-group">
-                            <label for="dob">Date Of Birth</label>
-                            <input type="date" class="form-control" id="dob" name="dob"
-                                placeholder="Enter Your date if birth (dd/mm/yyy)">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Contact Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone"
-                                placeholder="Enter Your Contact Number" pattern="[0-9]{10}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email address: (*)</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password: (*)</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmationPassword">Confirm Password: (*)</label>
-                            <input type="password" class="form-control" id="confirmationPassword"
-                                name="confirmationPassword" placeholder="Confirm Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </form>
-                    <hr>
-                    <div>
-                        <div>If you already have an account. <a href="/login"> Login</a></div>
-                        <div>Return to <a href="/"> Home Page</a></div>
-                    </div>
-                </div>
+    {{#if errors}}
+    {{#each errors as |error|}}
+    <div class="alert alert-danger">
+        {{error}}
+    </div>
+    {{/each}}
+    {{/if}}
+    <div id="card">
+        <div id="card-content">
+            <div id="card-title">
+                <h2>SignUp</h2>
+                <div class="underline-title"></div>
             </div>
+            <form method="post" class="form" action="/register">
+                <label id="firstlabel" for="firstname" style=" padding-top: 8px">
+                    First Name
+                </label>
+                <input id="firstname" class="signup-form-content" type="text" name="firstname" autoComplete="on"
+                    required />
+                <div class="signup-form-border" id="name"></div>
+                <label id="lastname" for="last-name" style=" padding-top: 8px">
+                    Last Name
+                </label>
+                <input id="lastname" class="signup-form-content" type="text" name="lastname" autoComplete="on"
+                    required />
+                <div class="signup-form-border" id="last-name"></div>
+                <label for="Address" style=" padding-top: 13px">
+                    Address
+                </label>
+                <input id="Address" class="signup-form-content" type="text" name="Address" autoComplete="on" required />
+                <div class="signup-form-border"></div>
+                <label for="phone" style=" padding-top: 13px">
+                    Contact Number
+                </label>
+                <input id="phone" class="signup-form-content" type="text" name="phone" autoComplete="on" required />
+                <div class="signup-form-border"></div>
+                <label for="dob" style=" padding-top: 22px">
+                    Date of Birth
+                </label>
+                <input type="date" class="sign-form-content" id="dob" name="dob" required>
+                <label for="email" style=" padding-top: 16px">
+                    Email*
+                </label>
+                <input id="email" class="signup-form-content" type="email" name="email" autoComplete="on" required />
+                <div class="signup-form-border"></div>
+                <label for="password" style=" padding-top: 16px">
+                    Password*
+                </label>
+                <input id="password" class="signup-form-content" type="password" name="password" required />
+                <div class="signup-form-border"></div>
+                <label for="confirmationPassword" style=" padding-top: 16px">
+                    Confirm Password*
+                </label>
+                <input id="confirmationPassword" class="signup-form-content" type="password" name="confirmationPassword"
+                    required />
+                <div class="signup-form-border"></div>
+                <input id="submit-btn" type="submit" name="submit" value="SignUp" />
+                <a href="/login" id="signup">Already have account ?</a>
+                <a href="/" id="signup">Return to Home Page</a>
+            </form>
         </div>
     </div>
 </body>

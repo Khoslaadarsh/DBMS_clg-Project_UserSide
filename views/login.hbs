@@ -5,46 +5,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href='Login_Page.css'>
     <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="/main.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
 </head>
 
 <body>
-    <div class="container">
-        <div class="container">
-            <div class="row mt-5">
-                <div class="col-sm-7 image-left">
-                </div>
-                <div class="col-sm-5 mt-10">
-                    {{#if errors}}
-                    {{#each errors as |error|}}
-                    <div class="alert alert-danger">
-                        {{error}}
-                    </div>
-                    {{/each}}
-                    {{/if}}
-                    <form method="post" action="/login">
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                    <hr>
-                    <div>
-                        <div>If you haven't had an account. <a href="/register"> Create a new account</a></div>
-                        <div>Return to <a href="/"> Home Page</a></div>
-                    </div>
-                </div>
+    <div id="logincard">
+        {{#if errors}}
+        {{#each errors as |error|}}
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+        {{/each}}
+        {{/if}}
+        <div id="card-content">
+            <div id="card-title">
+                <h2>LOGIN</h2>
+                <div class="underline-title"></div>
             </div>
+            <form method="post" class="form" action="/login">
+                <label for="user-email" style="padding-top: 13px">
+                    &nbsp; Email
+                </label>
+                <input id="user-email" class="form-content" type="email" name="email" autoComplete="on" required />
+                <div class="form-border"></div>
+                <label for="user-password" style="padding-top: 22px">
+                    &nbsp; Password
+                </label>
+                <input id="user-password" class="form-content" type="password" name="password" required />
+                <div class="form-border"></div>
+                <a href="#" class="fpass">
+                    <legend id="forgot-pass">Forgot password?</legend>
+                </a>
+                <!-- <div class="useradmin">
+                    <select class="form-select" id="inputGroupSelect01" value={this.state.category}
+                        onChange={this.handleChange}>
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                        disabled={this.state.category==="User" } placeholder="Admin ID" />
+                </div> -->
+                <input id="login-submit-btn" type="submit" name="submit" value="LOGIN" />
+                <!-- <div> -->
+                <!-- <a href="localhost:4444" id="signup" type="submit">
+                    {{!-- <div style="text-align: right;"> --}}
+                        {{!-- <button type="submit" style="text-align: right;" class="btn btn-secondary"> --}}
+                            Login As Admin
+                            {{!-- </button> --}}
+                        {{!-- </div> --}}
+                </a> -->
+                <a href="/register" id="signup">Don't have account yet?</a>
+                <!-- <div id="signup">If you haven't had an account. <a href="/register" id="signup"> Create a new account</a></div> -->
+                <div id="signup"><a href="/" id="signup">Return to Home Page</a></div>
+                <!-- </div> -->
+            </form>
         </div>
     </div>
 </body>

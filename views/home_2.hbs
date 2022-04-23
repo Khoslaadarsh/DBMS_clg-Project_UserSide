@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>RailRev Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='homepage2.css'>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Shadow&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <script src="event.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Button used to open the contact form - fixed at the bottom of the page */
+        .open-button {
+            background-color: #555;
+            color: rgb(28, 26, 26);
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+        }
+
+        /* The popup form - hidden by default */
+        .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #2a2828;
+            z-index: 9;
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 100%;
+            padding: 10px;
+            background-color: rgb(20, 19, 19);
+        }
+
+        /* Full-width input fields */
+        .form-container input[type=text],
+        .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #171616;
+        }
+
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus,
+        .form-container input[type=password]:focus {
+            background-color: rgb(11, 10, 10);
+            outline: none;
+        }
+
+        /* Set a style for the submit/login button */
+        .form-container .btn {
+            background-color: #04AA6D;
+            color: rgb(16, 15, 15);
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            background-color: red;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover,
+        .open-button:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #283d9c; color: white;">
+        <div class="container-fluid col-10">
+            <a class="navbar-brand" href="#" style="font-weight: bold;">
+                RailRev
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link  text-white active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white" href="#">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white">About</a>
+                    </li>
+                </ul>
+                <div class="text-end">
+                    <form action="/logout" method="post">
+                        <button class="btn btn-outline-light me-2">Logout</button>
+                        {{!-- <button class="btn btn-primary"> Log out</button> --}}
+                    </form>
+                    <button class="btn btn-outline-light me-2 open-button" onclick="openForm()">Show Booked
+                        Tickets</button>
+                    {{!-- <button class="open-button" onclick="openForm()">Open Form</button> --}}
+
+                    <div class="form-popup" id="myForm">
+
+                        {{!-- <form action="#" class="form-container">
+                            --}}
+                            <div class="form-container">
+
+                                <h1>Tickets</h1>
+
+                                <label for="email"><b>Booked Tickets by you</b></label>
+                                {{!-- <input type="text" placeholder="Enter Email" name="email" required> --}}
+                                <table id="myTable" class="table table-hover shadow bg-body rounded">
+                                    <thead class="table rounded" style="background-color: #283d9c; color: white;">
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>TicketID</th>
+                                            <th>TrainID</th>
+                                            <th>Date of boarding</th>
+                                            <th>Name of Passenger</th>
+                                            <th>
+                                                Cancel Ticket
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each tickets as |ticket|}}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{ticket.TicketId}}</td>
+                                            <td>{{ticket.TrainId}}</td>
+                                            <td>{{ticket.nameOfPassenger}}</td>
+                                            <td>{{ticket.DateOfBoarding}}</td>
+
+                                            <td>
+                                                <button class="calcelTicket btn btn-danger">Cancel Ticket</button>
+                                            </td>
+
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                                </table>
+                                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                            </div>
+                            {{!--
+                        </form> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="greet" style="font-family: 'Bungee Shade', cursive; color: #283d9c;">
+        <h1>
+            <span style="font-family: 'Fredoka One', cursive;">Hello </span><span
+                style="font-family: 'Londrina Shadow', cursive; padding-left: 5px;">
+                Welcome {{user.First_name}} {{user.Last_name}}
+            </span>
+        </h1>
+    </div>
+    <div class="card-holder cards">
+        <div class="card text-center shadow-sm bg-body rounded" style="width: 35rem;">
+            <div class="card-header" style="background-color: #283d9c; color: white; font-weight: bold;">
+                Search Trains
+            </div>
+            <form action="/trains  " method="get" class="enter">
+                <div class="container-fluid row row-cols-1 row-cols-md-2 g-4 mb-3">
+                    <div class="col-3">
+                        {{!-- <input type="text" class="form-control" id="train_from" name="train_from"
+                            placeholder="From"> --}}
+                        <select class="form-select" name="train_from" id="train_from"
+                            aria-label="Default select example">
+                            <option value="">From</option>
+                            {{#each Stations as |station|}}
+                            <option value="{{station.Name}}">{{station.Name}}</option>
+                            {{/each}}
+
+                        </select>
+                    </div>
+                    <div class="col-3 ">
+                        {{!-- <input type="text" class="form-control" id="train_to" name="train_to" placeholder="To">
+                        --}}
+                        <select class="form-select" name="train_to" id="train_to" aria-label="Default select example"
+                            required>
+                            <option value="">To</option>
+                            {{#each Stations as |station|}}
+                            <option value="{{station.Name}}">{{station.Name}}</option>
+                            {{/each}}
+
+                        </select>
+                    </div>
+                </div>
+                <div class="container-fluid mb-3 row">
+                    <!-- <label for="inputPassword" class="col-sm-4 col-form-label">Select Date: </label> -->
+                    <div class="col-6">
+                        <input type="date" class="form-control" id="train_date" name="train_date" id="inputPassword"
+                            required>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>All Classes</option>
+                            <option value="1">Sleeper (SL)</option>
+                            <option value="2">First Class (FC)</option>
+                            <option value="3">Second sitting (2S)</option>
+                            <option? value="3">AC First Class (AC1)</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Search</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
+
+</html>

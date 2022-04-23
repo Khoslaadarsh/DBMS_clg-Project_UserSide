@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Station</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='train.css'>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 8;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            margin: 50px auto;
+            border: 1px solid #999;
+            width: 60%;
+        }
+
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+
+        button.button:hover {
+            border-bottom: #a99567 1px solid;
+            color: #a99567;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <script src='event.js'></script>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #283d9c; color: white;">
+        <div class="container-fluid col-10">
+            <a class="navbar-brand" href="#" style="font-weight: bold;">RailRev</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link  text-white active" aria-current="page" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white" href="#">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white">About</a>
+                    </li>
+                </ul>
+                {{var from = req.query.train_from}}
+                {{var to = req.query.train_to}}
+                <div class="text-end">
+                    <form action="/home" method="get">
+                        <button class="btn btn-outline-light me-2">Search</button>
+                    </form>
+
+
+                </div>
+                <div class="text-end">
+                    <form action="/logout" method="post">
+                        <button class="btn btn-outline-light me-2">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h3>Trains that run from <span id="from_">{{req.query.train_from}}</span> to <span id="to_">
+                {{req.query.train_to}} </span>:</h3>
+
+    </div>
+    <div id="modalOne" class="modal">
+        <div class="modal-content">
+            <div class="contact-form">
+                <a class="close">&times;</a>
+                <form action="/bookTicket" method="POST">
+                    <h2>Ticket Booking</h2>
+                    <div>
+                        Full Name
+                        <input class="fname" type="text" name="fname" id="fname" placeholder="Full name" required />
+                        <br>
+                        Train From
+                        <input type="text" name="from" id="from" value="{{req.query.train_from}}" readonly />
+                        <br>
+                        Train To
+                        <input type="text" name="to" id="to" value="{{req.query.train_to}}" readonly />
+                        <br>
+                        Train No
+                        <input class="tno" type="text" name="tno" id="tno" readonly />
+                        <br>
+                        Train name
+                        <input class="tname" type="text" name="tname" id="tname" /readonly>
+                        <br>
+                        Fare
+                        <input type="number" name="fare" id="fare" readonly />
+                        <br>
+                        Date of boarding
+                        <input type="date" name="date" id="date" value="{{req.query.train_date}}" readonly>
+                        <br>
+                        Email
+                        <input type="email" name="email" placeholder="Email" required />
+                        <br>
+                        Contact No
+                        <input type="tel" name="number" placeholder="Phone number" required />
+
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="curstations">
+        <table id="myTable" class="table table-hover shadow-sm bg-body rounded">
+            <thead class="table" style="background-color: #283d9c; color: white;">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Train Name</th>
+                    <th>Seats Available</th>
+                    <th>Train No.</th>
+                    <th>Fare</th>
+                    <th>Book</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{#each trains as |train|}}
+                <tr>
+                    <td></td>
+                    <td>{{train.Name}}</td>
+                    <td>{{train.Seat_Available}}</td>
+                    <td>{{train.Train_No}}</td>
+                    <td class="fare"></td>
+                    <td><button class="btn btn-primary bookTicket button" data-modal="modalOne">Book</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<script>
+    let modalBtns = [...document.querySelectorAll(".button")];
+    modalBtns.forEach(function (btn) {
+        btn.onclick = function () {
+            let modal = btn.getAttribute("data-modal");
+            document.getElementById(modal).style.display = "block";
+        };
+    });
+    let closeBtns = [...document.querySelectorAll(".close")];
+    closeBtns.forEach(function (btn) {
+        btn.onclick = function () {
+            let modal = btn.closest(".modal");
+            modal.style.display = "none";
+        };
+    });
+    window.onclick = function (event) {
+        if (event.target.className === "modal") {
+            event.target.style.display = "none";
+        }
+    };
+
+</script>
+
+</html>
+
+
+{{!-- p {
+margin: 0 0 20px;
+font-weight: 400;
+color: #999;
+} --}}
+
+
+
+{{!--
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Title of the document</title>
+</head>
+
+<body>
+    <h2>Multiple Popup Forms</h2>
+    <p>
+        <button class="button" data-modal="modalOne">Contact Us</button>
+    </p>
+    <p>
+        <button class="button" data-modal="modalTwo">Send a Compliant Form</button>
+    </p>
+
+
+</body>
+
+</html> --}}

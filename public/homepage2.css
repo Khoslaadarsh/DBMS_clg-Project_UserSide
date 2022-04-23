@@ -1,0 +1,25 @@
+.cards {
+    transform: translateY(20%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .greet {
+    max-height: 50px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 3%;
+  }
+  .add-text {
+    color: rgba(58, 146, 187, 0.767);
+    text-align: center;
+    font-weight: 500;
+  }
+  .enter {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  

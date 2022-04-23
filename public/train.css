@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    .card-holder {
+    width: 100vw;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* transform: translateY(40%); */
+    }
+    .card-header {
+    color: white;
+    /* background-color: #2a0f55; */
+    font-weight: bold;
+    }
+    .card {
+    /* max-width: 500px; */
+    text-align: center;
+    font-family: Arial;
+    }
+    .enter {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    }
+    .curstations {
+    width: 100vw;
+    /* min-height: 50vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    }
+    .table {
+    max-width: 60%;
+    text-align: center;
+    font-family: Arial;
+    }
+    
+    .cng-color {
+    background-color: #2a0f55;
+    }

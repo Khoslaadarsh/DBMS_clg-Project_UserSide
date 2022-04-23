@@ -19,7 +19,7 @@ connection.query(
 // ROUTES
 connection.query(
     `CREATE TABLE IF NOT EXISTS Routes (
-        Route_No INTEGER PRIMARY KEY,
+        Route_No INTEGER PRIMARY KEY AUTO_INCREMENT,
         Length numeric NOT NULL,
         Expected_Time numeric
     );
@@ -49,6 +49,7 @@ connection.query(
 )
 
 // TRAIN
+// Added EndStationID as foreign key from station Table
 connection.query(
     `CREATE TABLE IF NOT EXISTS Train (
         Name varchar(25) NOT NULL,
@@ -192,7 +193,14 @@ connection.query(
 
 )
 
+// alter table Train add constraint FK_End_Station Foreign Key (Station_ID)
+// references Station(Station_ID);
 
+
+// alter table Train add EndStationID INTEGER;
+// desc Train;
+
+//mysql -u tempUser -p
 
 
 
