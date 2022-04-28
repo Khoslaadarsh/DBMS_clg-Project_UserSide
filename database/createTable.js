@@ -71,39 +71,39 @@ connection.query(
 )
 
 // PASSENGER
-connection.query(
-    `CREATE TABLE IF NOT EXISTS Passenger (
-        Passenger_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-        Address varchar(250) NOT NULL,
-        Age INTEGER NOT NULL,
-        Aadhar_No INTEGER NOT NULL,
-        First_name varchar(25) NOT NULL,
-        Last_name varchar(25)
-    );
-    `,
-    (err, results) => {
-        if (err) console.error(err);
-        else console.log("Table PASSENGER Created Successfully");
-    }
-)
+// connection.query(
+//     `CREATE TABLE IF NOT EXISTS Passenger (
+//         Passenger_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+//         Address varchar(250) NOT NULL,
+//         Age INTEGER NOT NULL,
+//         Aadhar_No INTEGER NOT NULL,
+//         First_name varchar(25) NOT NULL,
+//         Last_name varchar(25)
+//     );
+//     `,
+//     (err, results) => {
+//         if (err) console.error(err);
+//         else console.log("Table PASSENGER Created Successfully");
+//     }
+// )
 
 
 // RIDE ON
-connection.query(
-    `CREATE TABLE IF NOT EXISTS Ride_On (
-        Train_No INTEGER,
-        Passenger_ID INTEGER,
-        PRIMARY KEY (Train_No, Passenger_ID),
-        FOREIGN KEY(Train_No) references Train(Train_No),
-        FOREIGN KEY(Passenger_ID) references Passenger(Passenger_ID)
-    );
-    `,
-    (err, results) => {
-        if (err) console.error(err);
-        else console.log("Table RIDE ON Created Successfully");
-    }
+// connection.query(
+//     `CREATE TABLE IF NOT EXISTS Ride_On (
+//         Train_No INTEGER,
+//         Passenger_ID INTEGER,
+//         PRIMARY KEY (Train_No, Passenger_ID),
+//         FOREIGN KEY(Train_No) references Train(Train_No),
+//         FOREIGN KEY(Passenger_ID) references Passenger(Passenger_ID)
+//     );
+//     `,
+//     (err, results) => {
+//         if (err) console.error(err);
+//         else console.log("Table RIDE ON Created Successfully");
+//     }
 
-)
+// )
 
 
 // USER
@@ -144,7 +144,7 @@ connection.query(
 
 // TICKET
 connection.query(
-    `CREATE TABLE IF NOT EXISTS Ticket (
+    `CREATE TABLE IF NOT EXISTS Tickets (
         Ticket_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
         Coach_No varchar(5) NOT NULL,
         Departure_Time varchar(25) NOT NULL,
@@ -160,38 +160,47 @@ connection.query(
 )
 
 
-// BOOK - CANCEL
+// CANCELED TICKETS
 connection.query(
-    `CREATE TABLE IF NOT EXISTS book_cancel (
-        User_ID INTEGER,
-        Ticket_ID INTEGER PRIMARY KEY,
-        FOREIGN KEY(User_ID) references user(User_ID),
-        FOREIGN KEY(Ticket_ID) references Ticket(Ticket_ID)
-    );
+    `CREATE TABLE CanceledTicket( 
+        UserId int, 
+        TicketId int, 
+        Fare int, 
+        DateOfBoarding date, 
+        Email varchar(25), 
+        numebr int, 
+        nameOfPassenger varchar(25), 
+        Boardind_From int, 
+        Boardind_To int, 
+        TrainId int, 
+        Primary Key(TicketId ),  
+        Foreign Key (TrainId) References Train(Train_No) 
+        on delete cascade);
+
     `,
     (err, results) => {
         if (err) console.error(err);
-        else console.log("Table BOOK-CANCEL Created Successfully");
+        else console.log("Table CANCELED TICKETS Created Successfully");
     }
 )
 
 
 // HAVE
-connection.query(
-    `CREATE TABLE IF NOT EXISTS have (
-        Passenger_ID INTEGER,
-        Ticket_ID INTEGER PRIMARY KEY,
-        FOREIGN KEY(Passenger_ID) references Passenger(Passenger_ID),
-        FOREIGN KEY(Ticket_ID) references Ticket(Ticket_ID)
-    );
+// connection.query(
+//     `CREATE TABLE IF NOT EXISTS have (
+//         Passenger_ID INTEGER,
+//         Ticket_ID INTEGER PRIMARY KEY,
+//         FOREIGN KEY(Passenger_ID) references Passenger(Passenger_ID),
+//         FOREIGN KEY(Ticket_ID) references Ticket(Ticket_ID)
+//     );
     
-    `,
-    (err, results) => {
-        if (err) console.error(err);
-        else console.log("Table HAVE Created Successfully");
-    }
+//     `,
+//     (err, results) => {
+//         if (err) console.error(err);
+//         else console.log("Table HAVE Created Successfully");
+//     }
 
-)
+// )
 
 // alter table Train add constraint FK_End_Station Foreign Key (Station_ID)
 // references Station(Station_ID);
@@ -202,5 +211,8 @@ connection.query(
 
 //mysql -u tempUser -p
 
+
+// alter table Tickets add Boarding_To int;
+// alter table _____ modify column DateOfBoarding date;
 
 
